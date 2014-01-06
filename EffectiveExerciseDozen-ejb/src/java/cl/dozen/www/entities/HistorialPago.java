@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author rob_sandova
+ * @author root
  */
 @Entity
 @Table(name = "historialPago")

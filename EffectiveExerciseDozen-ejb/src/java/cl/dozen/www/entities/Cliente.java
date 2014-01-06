@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rob_sandova
+ * @author root
  */
 @Entity
 @Table(name = "cliente")
@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByClienteRut", query = "SELECT c FROM Cliente c WHERE c.clienteRut = :clienteRut"),
     @NamedQuery(name = "Cliente.findByClienteCodigo", query = "SELECT c FROM Cliente c WHERE c.clienteCodigo = :clienteCodigo"),
     @NamedQuery(name = "Cliente.findByClienteNombre", query = "SELECT c FROM Cliente c WHERE c.clienteNombre = :clienteNombre"),
-    @NamedQuery(name = "Cliente.findByClienteApellidoPaterno", query = "SELECT c FROM Cliente c WHERE c.clienteApellidoPaterno Like :clienteApellidoPaterno"),
+    @NamedQuery(name = "Cliente.findByClienteApellidoPaterno", query = "SELECT c FROM Cliente c WHERE c.clienteApellidoPaterno LIKE :clienteApellidoPaterno"),
     @NamedQuery(name = "Cliente.findByClienteApellidoMaterno", query = "SELECT c FROM Cliente c WHERE c.clienteApellidoMaterno = :clienteApellidoMaterno"),
     @NamedQuery(name = "Cliente.findByClienteDireccion", query = "SELECT c FROM Cliente c WHERE c.clienteDireccion = :clienteDireccion"),
     @NamedQuery(name = "Cliente.findByClienteComuna", query = "SELECT c FROM Cliente c WHERE c.clienteComuna = :clienteComuna"),
@@ -49,10 +49,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByClienteSexo", query = "SELECT c FROM Cliente c WHERE c.clienteSexo = :clienteSexo"),
     @NamedQuery(name = "Cliente.findByClienteEstadoCivil", query = "SELECT c FROM Cliente c WHERE c.clienteEstadoCivil = :clienteEstadoCivil")})
 public class Cliente implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteclienteRut")
-    private Collection<Evaluacion> evaluacionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private Collection<Asistencia> asistenciaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -111,8 +107,10 @@ public class Cliente implements Serializable {
     @Size(max = 10)
     @Column(name = "clienteEstadoCivil")
     private String clienteEstadoCivil;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private Asistencia asistencia;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteclienteRut")
+    private Collection<Evaluacion> evaluacionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private Collection<Asistencia> asistenciaCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente")
     private PlanContratado planContratado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteclienteRut")
@@ -243,12 +241,22 @@ public class Cliente implements Serializable {
         this.clienteEstadoCivil = clienteEstadoCivil;
     }
 
-    public Asistencia getAsistencia() {
-        return asistencia;
+    @XmlTransient
+    public Collection<Evaluacion> getEvaluacionCollection() {
+        return evaluacionCollection;
     }
 
-    public void setAsistencia(Asistencia asistencia) {
-        this.asistencia = asistencia;
+    public void setEvaluacionCollection(Collection<Evaluacion> evaluacionCollection) {
+        this.evaluacionCollection = evaluacionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Asistencia> getAsistenciaCollection() {
+        return asistenciaCollection;
+    }
+
+    public void setAsistenciaCollection(Collection<Asistencia> asistenciaCollection) {
+        this.asistenciaCollection = asistenciaCollection;
     }
 
     public PlanContratado getPlanContratado() {
@@ -291,24 +299,6 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "cl.dozen.www.entities.Cliente[ clienteRut=" + clienteRut + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Asistencia> getAsistenciaCollection() {
-        return asistenciaCollection;
-    }
-
-    public void setAsistenciaCollection(Collection<Asistencia> asistenciaCollection) {
-        this.asistenciaCollection = asistenciaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Evaluacion> getEvaluacionCollection() {
-        return evaluacionCollection;
-    }
-
-    public void setEvaluacionCollection(Collection<Evaluacion> evaluacionCollection) {
-        this.evaluacionCollection = evaluacionCollection;
     }
     
 }

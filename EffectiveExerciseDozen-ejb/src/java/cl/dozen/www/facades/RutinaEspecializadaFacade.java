@@ -6,17 +6,17 @@
 
 package cl.dozen.www.facades;
 
-import cl.dozen.www.entities.TablaPGC;
+import cl.dozen.www.entities.RutinaEspecializada;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author rob_sandova
+ * @author root
  */
 @Stateless
-public class TablaPGCFacade extends AbstractFacade<TablaPGC> implements TablaPGCFacadeLocal {
+public class RutinaEspecializadaFacade extends AbstractFacade<RutinaEspecializada> implements RutinaEspecializadaFacadeLocal {
     @PersistenceContext(unitName = "EffectiveExerciseDozen-ejbPU")
     private EntityManager em;
 
@@ -25,8 +25,8 @@ public class TablaPGCFacade extends AbstractFacade<TablaPGC> implements TablaPGC
         return em;
     }
 
-    public TablaPGCFacade() {
-        super(TablaPGC.class);
+    public RutinaEspecializadaFacade() {
+        super(RutinaEspecializada.class);
     }
     
 }

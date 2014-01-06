@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author root
  */
 @Entity
 @Table(name = "tipoEjercicio")
@@ -50,7 +50,7 @@ public class TipoEjercicio implements Serializable {
     private String tipoEjercicioNombre;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 200)
     @Column(name = "tipoEjercicioDescripcion")
     private String tipoEjercicioDescripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoEjerciciotipoEjercicioId")

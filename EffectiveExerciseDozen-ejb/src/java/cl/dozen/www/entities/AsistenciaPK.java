@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author sergio
+ * @author root
  */
 @Embeddable
 public class AsistenciaPK implements Serializable {

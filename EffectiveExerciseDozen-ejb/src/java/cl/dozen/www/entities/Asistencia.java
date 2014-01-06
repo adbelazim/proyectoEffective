@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sergio
+ * @author root
  */
 @Entity
 @Table(name = "asistencia")
@@ -64,10 +64,6 @@ public class Asistencia implements Serializable {
 
     public Asistencia(int clienteclienteRut, Date asistenciaFecha) {
         this.asistenciaPK = new AsistenciaPK(clienteclienteRut, asistenciaFecha);
-    }
-
-    public Asistencia(Asistencia asistenciapk, boolean maquinaAsistencia, boolean claseAsistencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public AsistenciaPK getAsistenciaPK() {

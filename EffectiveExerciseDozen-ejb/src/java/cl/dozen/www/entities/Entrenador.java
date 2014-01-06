@@ -40,8 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Entrenador.findByEntrenadorSexo", query = "SELECT e FROM Entrenador e WHERE e.entrenadorSexo = :entrenadorSexo"),
     @NamedQuery(name = "Entrenador.findByEntrenadorMail", query = "SELECT e FROM Entrenador e WHERE e.entrenadorMail = :entrenadorMail")})
 public class Entrenador implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrenadorentrenadorRut")
-    private Collection<Evaluacion> evaluacionCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -80,6 +78,10 @@ public class Entrenador implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "entrenadorMail")
     private String entrenadorMail;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrenadorentrenadorRut")
+    private Collection<RutinaEspecializada> rutinaEspecializadaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrenadorentrenadorRut")
+    private Collection<Evaluacion> evaluacionCollection;
 
     public Entrenador() {
     }
@@ -162,6 +164,24 @@ public class Entrenador implements Serializable {
         this.entrenadorMail = entrenadorMail;
     }
 
+    @XmlTransient
+    public Collection<RutinaEspecializada> getRutinaEspecializadaCollection() {
+        return rutinaEspecializadaCollection;
+    }
+
+    public void setRutinaEspecializadaCollection(Collection<RutinaEspecializada> rutinaEspecializadaCollection) {
+        this.rutinaEspecializadaCollection = rutinaEspecializadaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Evaluacion> getEvaluacionCollection() {
+        return evaluacionCollection;
+    }
+
+    public void setEvaluacionCollection(Collection<Evaluacion> evaluacionCollection) {
+        this.evaluacionCollection = evaluacionCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -185,15 +205,6 @@ public class Entrenador implements Serializable {
     @Override
     public String toString() {
         return "cl.dozen.www.entities.Entrenador[ entrenadorRut=" + entrenadorRut + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Evaluacion> getEvaluacionCollection() {
-        return evaluacionCollection;
-    }
-
-    public void setEvaluacionCollection(Collection<Evaluacion> evaluacionCollection) {
-        this.evaluacionCollection = evaluacionCollection;
     }
     
 }
