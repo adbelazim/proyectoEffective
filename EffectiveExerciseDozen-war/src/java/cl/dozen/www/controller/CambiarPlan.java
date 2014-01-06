@@ -60,7 +60,8 @@ public class CambiarPlan {
 
         planContratado = new PlanContratado();
 
-        historialPago = new HistorialPago();    
+        historialPago = new HistorialPago();  
+        System.out.println("hola");
     }
    
     public void agregarPago(){
